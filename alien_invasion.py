@@ -35,6 +35,14 @@ class AlientInvation:
             """Start the main loop for the game."""
             # 3  runs continually 
             while True: 
+                #make a new _check_events() methods and move the lines that check wheather the player has clicked to close the window into this new method 
+                self._check_events()
+
+                #redraw the screen during each pass through the loop 
+
+            def _ceck_events(self): #call a mwethod from within a class 
+                """Respond to keypresses and mouse events"""
+
                 #Watch for keyboard and mouse events. 
                 # 4 this for loop is an event loop 
                 for event in pygame.event.get():
