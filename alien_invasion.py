@@ -47,6 +47,7 @@ class AlientInvation:
                 #fill the screen with the background color using the fill() method 
                 self.screen.fill(self.bg_color)
 
+                #by calling this function, the ship appears on the top of the background 
                 self.ship.blitme()
                 
                 #make the most recently drawn screen visible 
