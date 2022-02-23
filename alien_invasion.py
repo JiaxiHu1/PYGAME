@@ -55,16 +55,10 @@ class AlienInvasion:
                 #use the tools in the sys module to exit the game when the player quits
                 sys.exit()
             elif event.type == pygame.KEYDOWN: 
-                if event.key == pygame.K_RIGHT:
-                    self.ship.moving_right = True 
-                elif event.key == pygame.K_LEFT:
-                    self.ship.moving_left = True 
+                self._check_keydown_events(event)
 
             elif event.type == pygame.KEYUP: #release the right arrow key 
-                if event.key == pygame.K_RIGHT:
-                    self.ship.moving_right = False 
-                elif event.key == pygame.K_LEFT:
-                    self.ship.moving_left = False   
+                self._check_keyup_events(event)
 
 
 

@@ -7,6 +7,8 @@ class Ship:
         """Initialize the ship and set its starting position"""
         #assign the screen to an attribute of ship, so we can access it easily in all the methods in the class 
         self.screen = ai_game.screen 
+        self.settings = ai_game.settings 
+
         #we access the screen's rect attribut to use the get_rect() method and assign it to self.screen_rect()
         #doing so allows us to place the ship in the correct location on the screen 
         self.screen_rect = ai_game.screen.get_rect()
@@ -20,6 +22,9 @@ class Ship:
         #position of the ship at the bottom center of the screen 
         self.rect.midbottom = self.screen_rect.midbottom 
 
+        #store a decimal value of the ship's horizon position 
+        self.x = float(self.rect.x)
+
         #movement flag 
         #initially set it to false 
         self.moving_right = False 
@@ -28,11 +33,17 @@ class Ship:
     
     def update(self):
         """Update the ship's position based on the movement flag."""
-        if self.moving_right: 
-            self.rect.x += 1 
+        """Update the ship's x value, not the rect."""
+        #also limit the ship's range 
+        if self.moving_right and self.rect.right < self.screen_rect.right: 
+            self.x += self.settings.ship_speed 
         
-        if self.moving_left: 
-            self.rect.x -= 1 
+        if self.moving_left and self.rect.left > 0: 
+            self.x -=  self.settings.ship_speed 
+        
+        #update rect object from self.x 
+        self.rect.x = self.x 
+
 
 
 
