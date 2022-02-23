@@ -37,10 +37,11 @@ class AlientInvation:
             while True: 
                 #make a new _check_events() methods and move the lines that check wheather the player has clicked to close the window into this new method 
                 self._check_events()
+                self._update_screen()
 
                 #redraw the screen during each pass through the loop 
 
-            def _ceck_events(self): #call a mwethod from within a class 
+        def _check_events(self): #call a mwethod from within a class 
                 """Respond to keypresses and mouse events"""
 
                 #Watch for keyboard and mouse events. 
@@ -50,7 +51,15 @@ class AlientInvation:
                     if event.type == pygame.QUIT:
                         #use the tools in the sys module to exit the game when the player quits
                         sys.exit()
-                    
+                    elif event.type == pygame.KEYDOWN: 
+                        if event.key == pygame.K_RIGHT: #right arrow key - then move the ship to the right  
+                            #Move the ship to the right 
+                            self.ship.rect.x += 1 
+
+
+
+        def _update_screen(self):
+            """Update images on the screen, and dlip to the new screen"""      
                 #redraw the screen during each pass through the loop 
                 #fill the screen with the background color using the fill() method 
                 self.screen.fill(self.bg_color)
