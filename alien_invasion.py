@@ -1,10 +1,12 @@
 
 
 import sys 
+from time import sleep 
 import pygame 
 #import sys and pygame module 
 
 from settings import Settings 
+from game_stats import GameStats
 from ship import Ship #update - create a ship and calls the ship's blitme() method 
 from bullet import Bullet #Firing bullets - import bullet 
 from alien import Alien 
@@ -30,6 +32,9 @@ class AlienInvasion:
         #after import the settings, we do not need to hard code the numbers 
         self.screen = pygame.display.set_mode((self.settings.screen_width,self.settings.screen_height))
         pygame.display.set_caption("Alien Invasion")
+
+        #create an instance to store game statistics 
+        self.stats = GameStats(self)
 
         #from ship.py 
         self.ship = Ship(self)
@@ -61,6 +66,26 @@ class AlienInvasion:
 
             self._update_aliens()
     
+    def _ship_hit(self):
+        """Respond to the ship being hit by an alien"""
+
+        if self.stats.ships_left > 0:
+            # decrement ships_left
+            self.stats.ships_left -= 1
+            # 更新记分牌
+            self.scoreboard.prep_ships()
+
+            # get rid of any remaining aliens and bullets 
+            self.aliens.empty()
+            self.bullets.empty()
+
+            # create a new fleet and center the ship
+            self._create_fleet()
+            self.ship.center_ship()
+
+            # pause 
+            sleep(0.5)
+
     def _update_aliens(self):
         """Update the positions of all aliens in the fleet"""
         """Check if the fleet is at an edge, then update the positions of all aliens in the fleet"""
@@ -69,7 +94,8 @@ class AlienInvasion:
         #detecting alien and ship collisions 
         #look for alien-ship collisions 
         if pygame.sprite.spritecollideany(self.ship,self.aliens):
-            print("Ship hit!!!")
+            #print("Ship hit!!!")
+            self._ship_hit()
     
     def _check_fleet_edges(self):
         """Respond appropriately if any aliens have reached an edge"""
