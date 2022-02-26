@@ -21,19 +21,18 @@ class Alien(Sprite):
 
         # store the alien's exact horizontal position 
         self.x = float(self.rect.x)
-
-    def update(self):
-        """Move the alien to the right"""
-        self.x += self.settings.alien_speed * self.settings.fleet_direction
-        self.rect.x = self.x
-
-        '''
         self.y = float(self.rect.y)
 
+    def update(self):
+        """Move the alien to the right or left"""
+        self.x += self.settings.alien_speed * self.settings.fleet_direction
+        self.rect.x = self.x
+        
+
     def check_edge(self):
-        """检查外星人是否位于屏幕边缘，是则返回True"""
+        """return true if alien is at edge of screen """
+        screen_rect = self.screen.get_rect()
         if self.rect.right >= self.screen.get_rect().right or self.rect.left <= 0:
             return True
 
     
-        '''
