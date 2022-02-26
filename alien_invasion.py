@@ -59,6 +59,13 @@ class AlienInvasion:
             #the group automatically calls update for each spirit in the goup 
             self._update_bullets()
 
+            self._update_aliens()
+    
+    def _update_aliens(self):
+        """Update the positions of all aliens in the fleet"""
+        self.aliens.update()
+
+
         #get rid of bullets that have disappeared 
         #disappear off the top of the screen 
     #create the update_bullets method 
