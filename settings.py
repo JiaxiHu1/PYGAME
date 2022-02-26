@@ -19,3 +19,5 @@ class Settings:
         self.bullet_with = 3
         self.bullet_height = 15
         self.bullet_color = (60, 60, 60)
+        self.bullet_allowed = 3 #limiting the number of bullets 
+        
