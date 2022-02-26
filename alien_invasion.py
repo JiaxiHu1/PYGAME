@@ -7,6 +7,8 @@ import pygame
 from settings import Settings 
 from ship import Ship #update - create a ship and calls the ship's blitme() method 
 from bullet import Bullet #Firing bullets - import bullet 
+from alien import Alien 
+
 
 class AlienInvasion:
     """Overall clas to manage game assets and behavior.""" 
@@ -34,6 +36,8 @@ class AlienInvasion:
 
         #storing bullets in a group 
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+        self._create_fleet()
 
         #setting the background color 
         #(255,0,0) is red (0,255,0) is green and (0,0,255) is blue 
@@ -67,8 +71,26 @@ class AlienInvasion:
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
         print(len(self.bullets))
+    
+    def _create_fleet(self):
+        """create the fleet of aliens"""
+        # make an alien 
+        alien = Alien(self)
+        self.aliens.add(alien)
+        '''
+        alien_width = alien.rect.width
+        alien_height = alien.rect.height
+        available_space_x = self.settings.screen_width - alien_width
+        available_space_y = self.settings.screen_height - 3 * alien_height - self.ship.rect.height
+        num_aliens_x = available_space_x // (2 * alien_width)
+        num_aliens_rows = available_space_y // (2 * alien_height)
 
+        # 创建外星人群
+        for row_number in range(num_aliens_rows):
+            for alien_number in range(num_aliens_x):
+                self._create_alien(alien_number, row_number, alien_width, alien_height)
 
+        '''
 
             
 
@@ -100,7 +122,7 @@ class AlienInvasion:
         #press space key to fire bullet 
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
-            
+
 
     def _check_keyup_events(self, event): #when you release the key 
         if event.key == pygame.K_RIGHT:
@@ -125,6 +147,8 @@ class AlienInvasion:
 
         for bullet in self.bullets.sprites():
             bullet.draw_bullet() #to draw all fired bullets to the screen 
+        
+        self.aliens.daw(self.screen)
                 
         #make the most recently drawn screen visible 
         # 6 tells pygame to make the most recently drawn screen visible 
