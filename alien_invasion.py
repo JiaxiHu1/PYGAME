@@ -202,11 +202,16 @@ class AlienInvasion:
             if event.type == pygame.QUIT:
                 #use the tools in the sys module to exit the game when the player quits
                 sys.exit()
+            elif event.type == pygame.mouse.get_pos():
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_play_button(mouse_pos)
+
             elif event.type == pygame.KEYDOWN: 
                 self._check_keydown_events(event)
 
             elif event.type == pygame.KEYUP: #release the right arrow key 
                 self._check_keyup_events(event)
+
 
 
     def _check_keydown_events(self, event): #when you press the key 
