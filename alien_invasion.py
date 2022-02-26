@@ -7,6 +7,7 @@ import pygame
 
 from settings import Settings 
 from game_stats import GameStats
+from button import Button 
 from ship import Ship #update - create a ship and calls the ship's blitme() method 
 from bullet import Bullet #Firing bullets - import bullet 
 from alien import Alien 
@@ -44,6 +45,9 @@ class AlienInvasion:
         self.aliens = pygame.sprite.Group()
         self._create_fleet()
 
+        #make the play button 
+        self.play_button=Button(self,"Play")
+
         #setting the background color 
         #(255,0,0) is red (0,255,0) is green and (0,0,255) is blue 
         #and black is the mix of the three colors 
@@ -64,7 +68,7 @@ class AlienInvasion:
                 self._update_bullets()
 
                 self._update_aliens()
-                
+
             self._update_screen()
     
     def _ship_hit(self):
@@ -243,6 +247,10 @@ class AlienInvasion:
             bullet.draw_bullet() #to draw all fired bullets to the screen 
         
         self.aliens.draw(self.screen)
+
+        #Draw the play button if the game is inactive 
+        if not self.stats.game_active:
+            self.play_button.draw_button()
                 
         #make the most recently drawn screen visible 
         # 6 tells pygame to make the most recently drawn screen visible 

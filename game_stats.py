@@ -6,7 +6,7 @@ class GameStats:
         self.settings = ai_game.settings
         self.reset_stats()
         #start alien invasion in an inactive state 
-        self.game_active = Fasle
+        self.game_active = False
         self.high_score = 0  
          
 
