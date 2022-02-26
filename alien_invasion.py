@@ -20,6 +20,8 @@ class AlienInvasion:
 
         #running the game in fullscreen mode 
         self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+        self.settings.screen_width = self.screen.get_rect().width
+        self.settings.screen_height = self.screen.get_rect().height
 
 
         # 2 dimension of the game window 1200 pixels wide by 800 pixels high
@@ -98,6 +100,7 @@ class AlienInvasion:
         #press space key to fire bullet 
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
+            
 
     def _check_keyup_events(self, event): #when you release the key 
         if event.key == pygame.K_RIGHT:
@@ -121,7 +124,7 @@ class AlienInvasion:
         self.ship.blitme()
 
         for bullet in self.bullets.sprites():
-            bullet.draw_bullet() #to draw akk fired bullets to the screen 
+            bullet.draw_bullet() #to draw all fired bullets to the screen 
                 
         #make the most recently drawn screen visible 
         # 6 tells pygame to make the most recently drawn screen visible 
