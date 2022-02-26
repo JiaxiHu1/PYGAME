@@ -1,3 +1,5 @@
+
+
 import sys 
 import pygame 
 #import sys and pygame module 
@@ -14,6 +16,12 @@ class AlienInvasion:
         pygame.init()
         #import from Settings.py 
         self.settings = Settings()
+
+        #running the game in fullscreen mode 
+        self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
+        self.screen.screen.width = self.screen.get_rect().width
+        self.screen.screen.height = self.screen.get_rect().height
+
 
 
         # 2 dimension of the game window 1200 pixels wide by 800 pixels high
@@ -61,13 +69,16 @@ class AlienInvasion:
                 self._check_keyup_events(event)
 
 
-    def _check_keydown_events(self, event):
+    def _check_keydown_events(self, event): #when you press the key 
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
+        #press Q to quit 
+        elif event.key == pygame.K_q:
+            sys.exit()
 
-    def _check_keyup_events(self, event):
+    def _check_keyup_events(self, event): #when you release the key 
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
@@ -75,11 +86,11 @@ class AlienInvasion:
 
     def _update_screen(self):
         """Update images on the screen, and dlip to the new screen"""      
-                #redraw the screen during each pass through the loop 
-                #fill the screen with the background color using the fill() method 
+        #redraw the screen during each pass through the loop 
+        #fill the screen with the background color using the fill() method 
         self.screen.fill(self.settings.bg_color)
 
-                #by calling this function, the ship appears on the top of the background 
+        #by calling this function, the ship appears on the top of the background 
         self.ship.blitme()
                 
         #make the most recently drawn screen visible 

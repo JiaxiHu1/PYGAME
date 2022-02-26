@@ -1,3 +1,6 @@
+#update method to manage the ship's position and blitme method to draw the ship to the screen 
+
+
 import pygame 
 
 class Ship: 
