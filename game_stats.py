@@ -5,8 +5,8 @@ class GameStats:
         """Initialize statistics"""
         self.settings = ai_game.settings
         self.reset_stats()
-        #start alien invasion in an active state 
-        self.game_active = True
+        #start alien invasion in an inactive state 
+        self.game_active = Fasle
         self.high_score = 0  
          
 
