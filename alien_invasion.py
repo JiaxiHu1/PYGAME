@@ -21,6 +21,7 @@ class AlienInvasion:
         #running the game in fullscreen mode 
         self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 
+
         # 2 dimension of the game window 1200 pixels wide by 800 pixels high
         #after import the settings, we do not need to hard code the numbers 
         self.screen = pygame.display.set_mode((self.settings.screen_width,self.settings.screen_height))
@@ -50,7 +51,22 @@ class AlienInvasion:
 
             self.ship.update()
             #the group automatically calls update for each spirit in the goup 
-            self.bullets.update()
+            self._update_bullets()
+
+        #get rid of bullets that have disappeared 
+        #disappear off the top of the screen 
+    #create the update_bullets method 
+    def _update_bullets(self):
+        """Update position of bullets and get rid of old bullets"""
+        # update bullet positions 
+        self.bullets.update()
+
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+        print(len(self.bullets))
+
+
 
             
 
@@ -91,9 +107,9 @@ class AlienInvasion:
     
     def _fire_bullet(self):
         """create a new bullet and add it to the bullets group"""
-        
-        new_bullet = Bullet(self) 
-        self.bullets.add(new_bullet) 
+        if len(self.bullets) < self.settings.bullet_allowed: #when less than three, we create a new bullet 
+            new_bullet = Bullet(self) 
+            self.bullets.add(new_bullet) 
 
     def _update_screen(self):
         """Update images on the screen, and dlip to the new screen"""      
