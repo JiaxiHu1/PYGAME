@@ -56,3 +56,13 @@ class ScoreBoard:
         if self.stats.score > self.stats.high_score:
             self.stats.high_score = self.stats.score
             self.prep_high_score()
+    
+    def prep_level(self):
+        """Turn the level into a rendered image"""
+        level_str = "level: " + str(self.stats.level)
+        self.level_image = self.font.render(level_str, True, self.text_color, self.settings.bg_color)
+
+        # position the level below the score
+        self.level_rect = self.level_image.get_rect()
+        self.level_rect.top = self.score_rect.bottom + 5
+        self.level_rect.right = self.score_rect.right
