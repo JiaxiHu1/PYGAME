@@ -218,6 +218,9 @@ class AlienInvasion:
         #deactivating the play button 
         button_checked = self.play_button.rect.collidepoint(mouse_pos)
         if button_checked and not self.stats.game_active:
+
+            #reset the game settings - reset the speed 
+            self.settings.initialize_dynamic_settings()
             #hide the mouse cursor 
             pygame.mouse.set_visible(False)
 
