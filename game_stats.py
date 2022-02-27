@@ -17,6 +17,5 @@ class GameStats:
         self.ships_left = self.settings.ship_limit
         #reset the score each time a new game starts 
         self.score = 0
-        '''
-        self.level = 1
-        '''
+        self.level = 1 
+        

@@ -20,6 +20,7 @@ class ScoreBoard:
         # prepare the initial score image 
         self.prep_score()
         self.prep_high_score() #the high score will be displayed separately from the score, so we need a new method 
+        self.prep_level()
 
     def prep_score(self):
         """Turn the score into a rendered image"""
