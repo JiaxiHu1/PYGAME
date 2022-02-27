@@ -4,7 +4,7 @@
 import pygame 
 from pygame.sprite import Sprite 
 
-class Ship: 
+class Ship(Sprite): 
     """A class to manage the ship."""
 
     def __init__(self,ai_game):
@@ -48,10 +48,6 @@ class Ship:
         
         #update rect object from self.x 
         self.rect.x = self.x 
-
-
-
-
 
         #define the blitme() method, which draws the image to the screen at the position specified by self.rect 
     def blitme(self):
