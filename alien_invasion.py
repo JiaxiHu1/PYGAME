@@ -86,30 +86,29 @@ class AlienInvasion:
             if event.type == pygame.QUIT:
                 #use the tools in the sys module to exit the game when the player quits
                 sys.exit()
-            elif event.type == pygame.mouse.get_pos():
-                mouse_pos = pygame.mouse.get_pos()
-                self._check_play_button(mouse_pos)
 
             elif event.type == pygame.KEYDOWN: 
                 self._check_keydown_events(event)
 
             elif event.type == pygame.KEYUP: #release the right arrow key 
                 self._check_keyup_events(event)
+
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_play_button(mouse_pos)
     
     def _check_play_button(self, mouse_pos):
         """start a new game when the player clicks play"""
         #deactivating the play button 
-        button_checked = self.play_button.rect.collidepoint(mouse_pos)
-        if button_checked and not self.stats.game_active:
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+        if button_clicked and not self.stats.game_active:
 
             #reset the game settings - reset the speed 
             self.settings.initialize_dynamic_settings()
-            #hide the mouse cursor 
-            pygame.mouse.set_visible(False)
 
             #reset the game statistics 
             self.stats.reset_stats()
-            self.stats.game.active = True 
+            self.stats.game_active = True 
             self.sb.prep_score() #resetting the score 
             self.sb.prep_level()
             self.sb.prep_ships()
@@ -121,6 +120,7 @@ class AlienInvasion:
             #create a new fleet and center the ship 
             self._create_fleet()
             self.ship.center_ship()
+            pygame.mouse.set_visible(False)
     
     def _check_keydown_events(self, event): #when you press the key 
         if event.key == pygame.K_RIGHT:
@@ -178,6 +178,7 @@ class AlienInvasion:
         # make an alien 
         #create an alien and find the number of aliens in a row 
         # spacing between each alien is equal to one alien width 
+        
         alien = Alien(self)
         alien_width,alien_height = alien.rect.size 
         available_space_x = self.settings.screen_width - (2*alien_width)
@@ -193,6 +194,7 @@ class AlienInvasion:
         for row_number in range(number_rows):
             for alien_number in range(number_aliens_x): 
                 self._create_alien(alien_number,row_number)
+         
         
     def _create_alien(self,row_number,alien_number):
             #create an alien and palce it in the row 
