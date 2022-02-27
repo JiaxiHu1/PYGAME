@@ -38,7 +38,9 @@ class Settings:
         self.alien_speed = 1.0
         #fleet direction of 1 = right and -1 = left 
         self.fleet_direction = 1  
-        #self.alien_points = 50 
+        #updating the score as aliens are shot down 
+        self.alien_points = 50 
+
     
     def increase_speed(self):
         """increase speed settings"""

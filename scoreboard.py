@@ -34,3 +34,7 @@ class ScoreBoard:
         score_str = "current score: " + "{:,}".format(rounded_score) 
         self.score_image = self.font.render(score_str, True, self.text_color, self.settings.bg_color)
         '''
+    
+    def show_score(self):
+        """draw score to the screen"""
+        self.screen.blit(self.score_image,self.score_rect)
