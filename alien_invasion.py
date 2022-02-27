@@ -168,6 +168,10 @@ class AlienInvasion:
             #repopulating the fleet
             self.bullets.empty()
             self._create_fleet()
+
+            #increase level 
+            self.stats += 1 
+            self.sb.prep_level()
     
     #refactoring _create_fleet()
     def _create_fleet(self):
@@ -239,6 +243,7 @@ class AlienInvasion:
             self.stats.reset_stats()
             self.stats.game.active = True 
             self.sb.prep_score() #resetting the score 
+            self.sb.prep_level()
 
             #get rid of any remaining aliens and bullets 
             self.aliens.empty()
