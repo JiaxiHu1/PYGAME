@@ -82,8 +82,8 @@ class AlienInvasion:
         if self.stats.ships_left > 0:
             # decrement ships_left
             self.stats.ships_left -= 1
-            # 更新记分牌
-            self.scoreboard.prep_ships()
+            #decrease the ships left and update socreboard 
+            self.sb.prep_ships()
 
             # get rid of any remaining aliens and bullets 
             self.aliens.empty()
