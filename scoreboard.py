@@ -22,18 +22,15 @@ class ScoreBoard:
 
     def prep_score(self):
         """Turn the score into a rendered image"""
-        score_str = str(self.stats.score)
-        self.score_image = self.font.render(score_str, True,self.text_color,self.settings.bg_color)
+        rounded_score = round(self.stats.score, -1)  # tell python to round the value of stats.score to the nearest 10
+        score_str = "current score: " + "{:,}".format(rounded_score) #insert commas into numbers when converting a numerical value to a string 
+        self.score_image = self.font.render(score_str, True, self.text_color, self.settings.bg_color)
 
         # Display the score at the top right of the screen 
         self.score_rect = self.score_image.get_rect()
         self.score_rect.right = self.screen_rect.right - 20
         self.score_rect.top = 20
-        '''
-        rounded_score = round(self.stats.score, -1)  
-        score_str = "current score: " + "{:,}".format(rounded_score) 
-        self.score_image = self.font.render(score_str, True, self.text_color, self.settings.bg_color)
-        '''
+  
     
     def show_score(self):
         """draw score to the screen"""
