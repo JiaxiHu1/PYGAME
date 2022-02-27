@@ -35,9 +35,10 @@ class ScoreBoard:
   
     
     def show_score(self):
-        """draw score to the screen"""
+        """draw score and level to the screen"""
         self.screen.blit(self.score_image,self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
+        self.screen.blit(self.level_image,self.level_rect)
 
 
     def prep_high_score(self):
@@ -64,5 +65,6 @@ class ScoreBoard:
 
         # position the level below the score
         self.level_rect = self.level_image.get_rect()
-        self.level_rect.top = self.score_rect.bottom + 5
         self.level_rect.right = self.score_rect.right
+        self.level_rect.top = self.score_rect.bottom + 10
+        
