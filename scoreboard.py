@@ -13,6 +13,9 @@ class ScoreBoard:
         self.screen_rect = self.screen.get_rect()
         self.settings = ai_game.settings
         self.stats = ai_game.stats
+        self.prep_level()
+        self.prep_ships() #prepships
+
 
         # font settings for scoring information 
         self.text_color = (30, 30, 30)
@@ -68,4 +71,12 @@ class ScoreBoard:
         self.level_rect = self.level_image.get_rect()
         self.level_rect.right = self.score_rect.right
         self.level_rect.top = self.score_rect.bottom + 10
-        
+    
+    def prep_ships(self):
+        """show how many ships are left"""
+        self.ships = Group()
+        for ship_number in range(self.stats.ships_left):
+            ship = Ship(self.ai_game)
+            ship.rect.x = 10 + ship_number * ship.rect.width
+            ship.rect.y = 10
+            self.ships.add(ship)
