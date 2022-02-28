@@ -3,6 +3,7 @@
 import sys 
 from time import sleep 
 import pygame 
+from pygame.constants import MOUSEBUTTONDOWN
 #import sys and pygame module 
 
 from settings import Settings 
@@ -30,10 +31,6 @@ class AlienInvasion:
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
 
-
-        # 2 dimension of the game window 1200 pixels wide by 800 pixels high
-        #after import the settings, we do not need to hard code the numbers 
-        self.screen = pygame.display.set_mode((self.settings.screen_width,self.settings.screen_height))
         pygame.display.set_caption("Alien Invasion")
 
         #create an instance to store game statistics 
@@ -48,15 +45,11 @@ class AlienInvasion:
         #storing bullets in a group 
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
-        self._create_fleet()
-
+        
         #make the play button 
         self.play_button=Button(self,"Play")
+        self._create_fleet()
 
-        #setting the background color 
-        #(255,0,0) is red (0,255,0) is green and (0,0,255) is blue 
-        #and black is the mix of the three colors 
-        #after import the settings, we do not need to hard code the colors anymore 
         self.screen.fill(self.settings.bg_color)
 
 
@@ -180,7 +173,9 @@ class AlienInvasion:
         # spacing between each alien is equal to one alien width 
         
         alien = Alien(self)
-        alien_width,alien_height = alien.rect.size 
+        #alien_width,alien_height = alien.rect.size 
+        alien_width = alien.rect.width
+        alien_height = alien.rect.height
         available_space_x = self.settings.screen_width - (2*alien_width)
         number_aliens_x = available_space_x // (2 * alien_width) 
     
@@ -194,16 +189,19 @@ class AlienInvasion:
         for row_number in range(number_rows):
             for alien_number in range(number_aliens_x): 
                 self._create_alien(alien_number,row_number)
+        
          
         
     def _create_alien(self,row_number,alien_number):
             #create an alien and palce it in the row 
+            
             alien = Alien(self)
             alien_width,alien_height = alien.rect.size 
             alien.x = alien_width + 2 * alien_width * alien_number
             alien.rect.x = alien.x 
             alien.rect.y = alien.rect.height + 2*alien.rect.height*row_number
             self.aliens.add(alien)
+            
         
     def _check_fleet_edges(self):
         """Respond appropriately if any aliens have reached an edge"""
@@ -251,7 +249,7 @@ class AlienInvasion:
             self.settings.increase_speed()
 
             #increase level 
-            self.stats += 1 
+            self.stats.level += 1 
             self.sb.prep_level()
 
 
@@ -284,15 +282,14 @@ class AlienInvasion:
             bullet.draw_bullet() #to draw all fired bullets to the screen 
         
         self.aliens.draw(self.screen)
+        #draw the score information 
+        self.sb.show_score()
 
-        
 
         #Draw the play button if the game is inactive 
         if not self.stats.game_active:
             self.play_button.draw_button()
 
-        #draw the score information 
-        self.sb.show_score()
                 
         #make the most recently drawn screen visible 
         # 6 tells pygame to make the most recently drawn screen visible 
@@ -304,10 +301,8 @@ class AlienInvasion:
         """check if any aliens have reached the bottom of the screen """
         for alien in self.aliens.sprites():
             if alien.rect.bottom >= self.screen.get_rect().bottom:
-                #treat this the same as if the ship got hit 
                 self._ship_hit()  
-                break 
-    
+                break
     
 if __name__ =='__main__':
     #make a game instance, and run the game 

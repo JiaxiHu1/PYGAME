@@ -34,6 +34,10 @@ class Ship(Sprite):
         #initially set it to false 
         self.moving_right = False 
         self.moving_left = False 
+    
+    def blitme(self):
+        """Draw the ship at its current location"""
+        self.screen.blit(self.image,self.rect)
 
     
     def update(self):
@@ -50,9 +54,7 @@ class Ship(Sprite):
         self.rect.x = self.x 
 
         #define the blitme() method, which draws the image to the screen at the position specified by self.rect 
-    def blitme(self):
-        """Draw the ship at its current location"""
-        self.screen.blit(self.image,self.rect)
+    
     
     def center_ship(self):
         """center the ship on the screen"""
