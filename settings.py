@@ -24,7 +24,7 @@ class Settings:
 
         #Alien Settings 
         self.alien_speed = 1.0 
-        self.fleet_drop_speed = 10 
+        self.fleet_drop_speed =5  
         #fleet_direction of 1 represents right; -1 = left 
 
         #how quickly the game speed up 
@@ -43,7 +43,7 @@ class Settings:
         #fleet direction of 1 = right and -1 = left 
         self.fleet_direction = 1  
         #updating the score as aliens are shot down 
-        self.alien_points = 50 
+        self.alien_points = 10 
 
     
     def increase_speed(self):

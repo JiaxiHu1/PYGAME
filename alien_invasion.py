@@ -188,20 +188,18 @@ class AlienInvasion:
         # create the first row of aliens 
         for row_number in range(number_rows):
             for alien_number in range(number_aliens_x): 
-                self._create_alien(alien_number,row_number)
+                self._create_alien(alien_number,row_number,alien_width, alien_height)
         
-         
-        
-    def _create_alien(self,row_number,alien_number):
-            #create an alien and palce it in the row 
-            
-            alien = Alien(self)
-            alien_width,alien_height = alien.rect.size 
-            alien.x = alien_width + 2 * alien_width * alien_number
-            alien.rect.x = alien.x 
-            alien.rect.y = alien.rect.height + 2*alien.rect.height*row_number
-            self.aliens.add(alien)
-            
+    def _create_alien(self, alien_number, row_number, alien_width, alien_height):
+        """Create an alien colony"""
+        alien = Alien(self)
+        alien.x = alien_width + alien_number * alien_width * 2
+        alien.y = alien_height + 10 + row_number * alien_height * 2
+        alien.rect.x = alien.x
+        alien.rect.y = alien.y
+        self.aliens.add(alien)
+
+   
         
     def _check_fleet_edges(self):
         """Respond appropriately if any aliens have reached an edge"""

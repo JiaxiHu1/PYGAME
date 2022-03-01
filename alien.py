@@ -3,38 +3,32 @@ from pygame.sprite import Sprite
 
 
 class Alien(Sprite):
-    """A class to represent a single alien in the fleet"""
+    """Class representing a single alien"""
 
     def __init__(self, ai_game):
-        """initialize the alien and set its starting position"""
+        """Initialize the alien and set its initial position"""
         super().__init__()
         self.screen = ai_game.screen
         self.settings = ai_game.settings
 
-        # load the alien image and set its rect attribute 
+        # Load the alien image and set its rect property
         self.image = pygame.image.load("image/alien.bmp")
         self.rect = self.image.get_rect()
 
-        # Start each new alien near the top left of the screen 
+        # Each alien is initially near the top left corner of the screen
         self.rect.x = self.rect.width
         self.rect.y = self.rect.height
 
-        # store the alien's exact horizontal position 
+        # Store the exact location of the aliens
         self.x = float(self.rect.x)
-        #self.y = float(self.rect.y)
+        self.y = float(self.rect.y)
 
     def check_edge(self):
-        """return true if alien is at edge of screen """
-        #screen_rect = self.screen.get_rect()
-        if self.rect.right >= self.rect.right or self.rect.left <= 0:
+        """Check whether the alien is at the edge of the screen, and return if yes True"""
+        if self.rect.right >= self.screen.get_rect().right or self.rect.left <= 0:
             return True
 
     def update(self):
-        """Move the alien to the right or left"""
-        self.x += (self.settings.alien_speed * self.settings.fleet_direction)
+        """Move left or right"""
+        self.x += self.settings.alien_speed * self.settings.fleet_direction
         self.rect.x = self.x
-        
-
-    
-
-    
